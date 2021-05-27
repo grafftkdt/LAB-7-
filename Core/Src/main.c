@@ -144,10 +144,10 @@ int main(void)
 		if (micros() - Timestamp_Encoder >= 1000)
 		{
 			Timestamp_Encoder = micros();
-			EncoderVel = ((EncoderVel*99.0)+EncoderVelocity_Update())/100.0;
+			EncoderVel = ((EncoderVel*99.0)+EncoderVelocity_Update())/100.0;  // make more details of encoder
 			__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, PWM1);
 			__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, PWM2);
-			rpmnow = (EncoderVel*60)/1536;		//EncoderVel PPR>>rpm
+			rpmnow = (EncoderVel*60)/1536;		//EncoderVel PPR>>rpm  //encoder 12 * motor 1:64
 			errornow = rpmsetpoint - rpmnow;
 			sumerror += errornow;			 	//Integral
 			diff = errornow - errorpast; 		//Diff
