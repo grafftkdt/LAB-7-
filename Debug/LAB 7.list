@@ -1365,7 +1365,7 @@ int main(void)
  8001026:	eefc 7ae7 	vcvt.u32.f32	s15, s15
  800102a:	ee17 2a90 	vmov	r2, s15
  800102e:	639a      	str	r2, [r3, #56]	; 0x38
-			rpmnow = (EncoderVel*60)/1536;		//EncoderVel PPR>>rpm  //encoder 12 * motor 1:64
+			rpmnow = (EncoderVel*60)/1536;		//EncoderVel PPR>>rpm  //encoder 12 * motor 1:64	//QEI = 4*PPR but pulse width of encoder = QEI/2
  8001030:	4b5d      	ldr	r3, [pc, #372]	; (80011a8 <main+0x278>)
  8001032:	edd3 7a00 	vldr	s15, [r3]
  8001036:	ed9f 7a60 	vldr	s14, [pc, #384]	; 80011b8 <main+0x288>

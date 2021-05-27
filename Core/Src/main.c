@@ -147,7 +147,7 @@ int main(void)
 			EncoderVel = ((EncoderVel*99.0)+EncoderVelocity_Update())/100.0;  // make more details of encoder
 			__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, PWM1);
 			__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, PWM2);
-			rpmnow = (EncoderVel*60)/1536;		//EncoderVel PPR>>rpm  //encoder 12 * motor 1:64
+			rpmnow = (EncoderVel*60)/1536;		//EncoderVel PPR>>rpm  //encoder 12 * motor 1:64	//QEI = 4*PPR but pulse width of encoder = QEI/2
 			errornow = rpmsetpoint - rpmnow;
 			sumerror += errornow;			 	//Integral
 			diff = errornow - errorpast; 		//Diff
