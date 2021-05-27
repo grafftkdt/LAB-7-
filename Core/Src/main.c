@@ -147,7 +147,7 @@ int main(void)
 			EncoderVel = ((EncoderVel*99.0)+EncoderVelocity_Update())/100.0;
 			__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, PWM1);
 			__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, PWM2);
-			rpmnow = (EncoderVel*60)/3072;		//EncoderVel PPR>>rpm
+			rpmnow = (EncoderVel*60)/1536;		//EncoderVel PPR>>rpm
 			errornow = rpmsetpoint - rpmnow;
 			sumerror += errornow;			 	//Integral
 			diff = errornow - errorpast; 		//Diff
@@ -155,24 +155,24 @@ int main(void)
 			I = Ki*sumerror;
 			D = Kd*diff;
 			PID = P+I+D;
-//			if ( rpmsetpoint > 0)
-//			{
-//				if (PWM1 >= 65535)
-//				{
-//					PWM1 = 65535;
-//				}
-//				PWM1 += PID;
-//				PWM2 = 0;
-//			}
-//			if (rpmsetpoint < 0)
-//			{
-//				PWM2 -= PID;
-//				PWM1 = 0;
-//				if (PWM1 >= 65535)
-//				{
-//					PWM1 = 65535;
-//				}
-//			}
+			if ( rpmsetpoint > 0)
+			{
+				if (PWM1 >= 50000)
+				{
+					PWM1 = 50000;
+				}
+				PWM1 += PID;
+				PWM2 = 0;
+			}
+			if (rpmsetpoint < 0)
+			{
+				PWM2 -= PID;
+				PWM1 = 0;
+				if (PWM1 >= 50000)
+				{
+					PWM1 = 50000;
+				}
+			}
 			errorpast = errornow;
 		}
 
